@@ -3,11 +3,9 @@ import '../sass/Card.scss';
 const Card = () => {
     return (
         <div className="card">
+            <div className="card__circle"></div>
             <p className="card__name">Alexis</p>
-            <div className="card__circle">
-                <img className="card__img" src="" alt="pokemon img" />
-
-            </div>
+            <img className="card__img" src="" alt="Pokemon Img" />
 
         </div>
     )

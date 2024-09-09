@@ -30,6 +30,10 @@
         position: absolute;
         top: 56px;
         left: 25px;
-        z-index: -1;
+        
+    }
+    &__img {
+        position: absolute;
+        z-index: 10;
     }
 }
