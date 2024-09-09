@@ -50,49 +50,53 @@ const App = () => {
             let pokemonImageLevel2 = await getPokemonImages(pokemonLevel2);
             //agrego el nombre y su img al array
             pokemonEvolutions.push([pokemonLevel2, pokemonImageLevel2]);
-            
+
 
             if (data.chain.evolves_to[0].evolves_to.length !== 0) {
                 let pokemonLevel3 = data.chain.evolves_to[0].
-                evolves_to[0].species.name;
+                    evolves_to[0].species.name;
                 let pokemonImageLevel3 = await getPokemonImages(pokemonLevel3);
                 pokemonEvolutions.push([pokemonLevel3, pokemonImageLevel3]);
                 //console.log(pokemonEvolutions);
-                setEvolutions(pokemonEvolutions);
+                
             }
         }
+
+        setEvolutions(pokemonEvolutions)
     }
 
     async function getPokemonImages(name) {
-        const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${name}/`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
         const data = await response.json();
         return data.sprites.other['official-artwork'].front_default;
     }
 
     return (
-        <>
-            <div className="card-container">
-                {evolutions.map(pokemon => 
-                <Card key={pokemon[0]}
-                name={pokemon[0]} 
-                img={pokemon[1]}
-                />
+        <div className="app">
+            <h1>Pokémon Evolution Charts</h1>
+            <div className={`card-container card${evolutions.length}`}>
+
+                {evolutions.map(pokemon =>
+                    <Card key={pokemon[0]}
+                        name={pokemon[0]}
+                        img={pokemon[1]}
+                    />
                 )}
 
             </div>
 
             <div className="button-container">
-                <Button 
-                icon={<TiArrowLeftOutline />} 
-                handleClick={previewClick} 
+                <Button
+                    icon={<TiArrowLeftOutline />}
+                    handleClick={previewClick}
                 />
-                <Button 
-                icon={<TiArrowRightOutline />} 
-                handleClick={nextClick} 
+                <Button
+                    icon={<TiArrowRightOutline />}
+                    handleClick={nextClick}
                 />
             </div>
 
-        </>
+        </div>
     )
 }
 
