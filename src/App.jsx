@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 const App = () => {
 
     const [pokemonId, setPokemonId] = useState(1);
-    const [pokemonName, setPokemonName] = useState('');
     const [evolutions, setEvolutions] = useState([]);
 
 
@@ -38,7 +37,6 @@ const App = () => {
         //console.log(response);
         const data = await response.json();
         //console.log(data.chain.species.name);
-        setPokemonName(data.chain.species.name);
         let pokemonEvolutions = [];
 
         let pokemonLevel1 = data.chain.species.name;
@@ -74,7 +72,12 @@ const App = () => {
     return (
         <>
             <div className="card-container">
-                <Card />
+                {evolutions.map(pokemon => 
+                <Card key={pokemon[0]}
+                name={pokemon[0]} 
+                img={pokemon[1]}
+                />
+                )}
 
             </div>
 
@@ -83,7 +86,6 @@ const App = () => {
                 icon={<TiArrowLeftOutline />} 
                 handleClick={previewClick} 
                 />
-                {pokemonName}
                 <Button 
                 icon={<TiArrowRightOutline />} 
                 handleClick={nextClick} 
