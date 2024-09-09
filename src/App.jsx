@@ -38,6 +38,17 @@ const App = () => {
         const data = await response.json();
         //console.log(data.chain.species.name);
         setPokemonName(data.chain.species.name);
+        let pokemonEvolutions = [];
+
+        let pokemonLevel1 = data.chain.species.name;
+        let pokemonImageLevel1 = getPokemonImages(pokemonLevel1);
+        pokemonEvolutions.push(pokemonLevel1, pokemonImageLevel1);
+    }
+
+    async function getPokemonImages(name) {
+        const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${name}/`);
+        const data = await response.json();
+        return data.sprites.other['official-artwork'].front_default;
     }
 
     return (
